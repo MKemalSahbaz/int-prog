@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personel Takip Sistemi - Yeni Personel Ekle</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+</head>
+<body class="bg-gray-100">
+    <!-- Navbar -->
+    <nav class="bg-purple-600 text-white p-4 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold">Personel Takip Sistemi</h1>
+            <div class="flex items-center space-x-4">
+                <span class="text-sm">Hoş geldiniz, {{ session['kullanici'] }}</span>
+                <a href="{{ url_for('cikis') }}" class="bg-white text-purple-600 px-4 py-2 rounded hover:bg-opacity-90 transition duration-300">
+                    Çıkış Yap
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Ana İçerik -->
+    <div class="container mx-auto p-6">
+        <div class="max-w-2xl mx-auto">
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-semibold text-gray-800">Yeni Personel Ekle</h2>
+                    <a href="{{ url_for('index') }}" class="text-purple-600 hover:text-purple-800">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </a>
+                </div>
+
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="bg-green-500 text-white p-3 rounded mb-4">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+
+                <form method="POST" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Ad</label>
+                            <input type="text" name="ad" required
+                                class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-purple-600">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Soyad</label>
+                            <input type="text" name="soyad" required
+                                class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-purple-600">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Pozisyon</label>
+                            <select name="pozisyon" required
+                                class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-purple-600">
+                                <option value="">Pozisyon Seçin</option>
+                                <option value="Yazılım Geliştirici">Yazılım Geliştirici</option>
+                                <option value="İnsan Kaynakları">İnsan Kaynakları</option>
+                                <option value="Muhasebe">Muhasebe</option>
+                                <option value="Satış Temsilcisi">Satış Temsilcisi</option>
+                                <option value="Pazarlama">Pazarlama</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Maaş</label>
+                            <input type="number" name="maas" required min="0"
+                                class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-purple-600">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Başlangıç Tarihi</label>
+                            <input type="date" name="baslangic_tarihi" required
+                                class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-purple-600">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Durum</label>
+                            <select name="durum" required
+                                class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-purple-600">
+                                <option value="Aktif">Aktif</option>
+                                <option value="Pasif">Pasif</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Açıklama</label>
+                        <textarea name="aciklama" rows="4"
+                            class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-purple-600"></textarea>
+                    </div>
+
+                    <div class="flex justify-end space-x-4">
+                        <a href="{{ url_for('index') }}" 
+                            class="px-4 py-2 border border-gray-300 rounded text-gray-700 hover:bg-gray-50 transition duration-300">
+                            İptal
+                        </a>
+                        <button type="submit"
+                            class="px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700 transition duration-300">
+                            Personel Ekle
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Form animasyonu
+        anime({
+            targets: 'form',
+            translateY: [20, 0],
+            opacity: [0, 1],
+            duration: 800,
+            easing: 'easeOutExpo'
+        });
+    </script>
+</body>
+</html> 

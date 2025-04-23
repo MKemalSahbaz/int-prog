@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personel Takip Sistemi - Tanıtım</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <style>
+        .hero-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .feature-card {
+            transition: transform 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-lg">
+        <div class="container mx-auto px-6 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <span class="text-2xl font-bold text-purple-600">PTS</span>
+                    <span class="ml-2 text-gray-800">Personel Takip Sistemi</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="{{ url_for('giris') }}" class="text-gray-600 hover:text-purple-600">Giriş Yap</a>
+                    <a href="{{ url_for('kayit') }}" class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transition duration-300">
+                        Kayıt Ol
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient text-white py-20">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4">Personel Yönetimi Artık Çok Kolay</h1>
+                    <p class="text-xl mb-8 text-purple-100">Modern ve kullanıcı dostu arayüzü ile personel yönetimini kolaylaştırın.</p>
+                    <div class="flex space-x-4">
+                        <a href="{{ url_for('kayit') }}" class="bg-white text-purple-600 px-6 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition duration-300">
+                            Hemen Başla
+                        </a>
+                        <a href="#ozellikler" class="bg-transparent border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-purple-600 transition duration-300">
+                            Özellikleri Keşfet
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/2">
+                    <img src="https://placehold.co/600x400" alt="Personel Takip Sistemi" class="rounded-lg shadow-2xl">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Özellikler -->
+    <section id="ozellikler" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-12">Öne Çıkan Özellikler</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Özellik 1 -->
+                <div class="feature-card bg-white p-6 rounded-lg shadow-lg">
+                    <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Personel Yönetimi</h3>
+                    <p class="text-gray-600">Personel bilgilerini kolayca ekleyin, düzenleyin ve yönetin.</p>
+                </div>
+
+                <!-- Özellik 2 -->
+                <div class="feature-card bg-white p-6 rounded-lg shadow-lg">
+                    <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Raporlama</h3>
+                    <p class="text-gray-600">Detaylı raporlar ve istatistikler ile personel verilerini analiz edin.</p>
+                </div>
+
+                <!-- Özellik 3 -->
+                <div class="feature-card bg-white p-6 rounded-lg shadow-lg">
+                    <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Zaman Takibi</h3>
+                    <p class="text-gray-600">Personel giriş-çıkış ve çalışma saatlerini takip edin.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="bg-purple-50 py-20">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl font-bold mb-8">Hemen Başlayın</h2>
+            <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+                Personel yönetimini kolaylaştırmak için hemen kayıt olun ve sistemimizi keşfedin.
+            </p>
+            <a href="{{ url_for('kayit') }}" class="bg-purple-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-purple-700 transition duration-300 inline-block">
+                Ücretsiz Kayıt Ol
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <span class="text-2xl font-bold text-purple-400">PTS</span>
+                    <span class="ml-2">Personel Takip Sistemi</span>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="hover:text-purple-400">Hakkımızda</a>
+                    <a href="#" class="hover:text-purple-400">İletişim</a>
+                    <a href="#" class="hover:text-purple-400">Gizlilik Politikası</a>
+                </div>
+            </div>
+            <div class="mt-8 text-center text-gray-400">
+                <p>&copy; 2024 Personel Takip Sistemi. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Animasyonlar
+        anime({
+            targets: '.feature-card',
+            translateY: [50, 0],
+            opacity: [0, 1],
+            delay: anime.stagger(100),
+            duration: 1000,
+            easing: 'easeOutExpo'
+        });
+    </script>
+</body>
+</html> 

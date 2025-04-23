@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personel Detay - PTS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-lg">
+        <div class="container mx-auto px-6 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <span class="text-2xl font-bold text-purple-600">PTS</span>
+                    <span class="ml-2 text-gray-800">Personel Takip Sistemi</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="{{ url_for('index') }}" class="text-gray-600 hover:text-purple-600">Panel</a>
+                    <a href="{{ url_for('cikis') }}" class="text-gray-600 hover:text-purple-600">Çıkış Yap</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Ana İçerik -->
+    <div class="container mx-auto px-6 py-8">
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h1 class="text-2xl font-bold text-gray-800">Personel Detayları</h1>
+                <div class="flex space-x-4">
+                    <a href="{{ url_for('personel_duzenle', personel_id=1) }}" class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transition duration-300">
+                        Düzenle
+                    </a>
+                    <button class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition duration-300">
+                        Sil
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Kişisel Bilgiler -->
+                <div class="bg-gray-50 p-6 rounded-lg">
+                    <h2 class="text-xl font-semibold mb-4 text-gray-800">Kişisel Bilgiler</h2>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="text-gray-600">Ad Soyad</label>
+                            <p class="font-medium">Ahmet Yılmaz</p>
+                        </div>
+                        <div>
+                            <label class="text-gray-600">TC Kimlik No</label>
+                            <p class="font-medium">12345678901</p>
+                        </div>
+                        <div>
+                            <label class="text-gray-600">Doğum Tarihi</label>
+                            <p class="font-medium">01.01.1990</p>
+                        </div>
+                        <div>
+                            <label class="text-gray-600">E-posta</label>
+                            <p class="font-medium">ahmet.yilmaz@example.com</p>
+                        </div>
+                        <div>
+                            <label class="text-gray-600">Telefon</label>
+                            <p class="font-medium">+90 555 123 4567</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- İş Bilgileri -->
+                <div class="bg-gray-50 p-6 rounded-lg">
+                    <h2 class="text-xl font-semibold mb-4 text-gray-800">İş Bilgileri</h2>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="text-gray-600">Departman</label>
+                            <p class="font-medium">Yazılım Geliştirme</p>
+                        </div>
+                        <div>
+                            <label class="text-gray-600">Pozisyon</label>
+                            <p class="font-medium">Yazılım Mühendisi</p>
+                        </div>
+                        <div>
+                            <label class="text-gray-600">İşe Başlama Tarihi</label>
+                            <p class="font-medium">01.01.2020</p>
+                        </div>
+                        <div>
+                            <label class="text-gray-600">Maaş</label>
+                            <p class="font-medium">15.000 TL</p>
+                        </div>
+                        <div>
+                            <label class="text-gray-600">Durum</label>
+                            <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-sm">Aktif</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Çalışma Geçmişi -->
+            <div class="mt-8">
+                <h2 class="text-xl font-semibold mb-4 text-gray-800">Çalışma Geçmişi</h2>
+                <div class="bg-gray-50 p-6 rounded-lg">
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full">
+                            <thead>
+                                <tr class="text-left">
+                                    <th class="py-2 px-4 text-gray-600">Tarih</th>
+                                    <th class="py-2 px-4 text-gray-600">Giriş</th>
+                                    <th class="py-2 px-4 text-gray-600">Çıkış</th>
+                                    <th class="py-2 px-4 text-gray-600">Toplam Süre</th>
+                                    <th class="py-2 px-4 text-gray-600">Durum</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="py-2 px-4">01.03.2024</td>
+                                    <td class="py-2 px-4">09:00</td>
+                                    <td class="py-2 px-4">18:00</td>
+                                    <td class="py-2 px-4">9 saat</td>
+                                    <td class="py-2 px-4">
+                                        <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-sm">Tamamlandı</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="py-2 px-4">29.02.2024</td>
+                                    <td class="py-2 px-4">09:15</td>
+                                    <td class="py-2 px-4">17:45</td>
+                                    <td class="py-2 px-4">8.5 saat</td>
+                                    <td class="py-2 px-4">
+                                        <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-sm">Tamamlandı</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

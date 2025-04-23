@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personel Takip Sistemi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+</head>
+<body class="bg-gray-100">
+    <!-- Navbar -->
+    <nav class="bg-purple-600 text-white p-4 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold">Personel Takip Sistemi</h1>
+            <div class="flex items-center space-x-4">
+                <span class="text-sm">Hoş geldiniz, {{ session['kullanici'] }}</span>
+                <a href="{{ url_for('cikis') }}" class="bg-white text-purple-600 px-4 py-2 rounded hover:bg-opacity-90 transition duration-300">
+                    Çıkış Yap
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Ana İçerik -->
+    <div class="container mx-auto p-6">
+        <!-- Filtreleme ve Arama -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Pozisyon Filtresi</label>
+                    <select class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-purple-600">
+                        <option value="">Tüm Pozisyonlar</option>
+                        <option value="Yazılım Geliştirici">Yazılım Geliştirici</option>
+                        <option value="İnsan Kaynakları">İnsan Kaynakları</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Durum Filtresi</label>
+                    <select class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-purple-600">
+                        <option value="">Tüm Durumlar</option>
+                        <option value="Aktif">Aktif</option>
+                        <option value="Pasif">Pasif</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Arama</label>
+                    <input type="text" placeholder="Personel ara..." 
+                        class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-purple-600">
+                </div>
+            </div>
+        </div>
+
+        <!-- Personel Listesi -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="p-4 bg-purple-600 text-white flex justify-between items-center">
+                <h2 class="text-xl font-semibold">Personel Listesi</h2>
+                <a href="{{ url_for('personel_ekle') }}" class="bg-white text-purple-600 px-4 py-2 rounded hover:bg-opacity-90 transition duration-300">
+                    Yeni Personel Ekle
+                </a>
+            </div>
+            
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ad Soyad</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Pozisyon</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Maaş</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Başlangıç Tarihi</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Durum</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <!-- Örnek Personel 1 -->
+                        <tr class="hover:bg-gray-50 transition duration-150">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0 h-10 w-10">
+                                        <div class="h-10 w-10 rounded-full bg-purple-100 flex items-center justify-center">
+                                            <span class="text-purple-600 font-semibold">AY</span>
+                                        </div>
+                                    </div>
+                                    <div class="ml-4">
+                                        <div class="text-sm font-medium text-gray-900">Ahmet Yılmaz</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">Yazılım Geliştirici</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">15000 ₺</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">2023-01-15</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                    Aktif
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                <button class="text-purple-600 hover:text-purple-900 mr-3">Düzenle</button>
+                                <button class="text-red-600 hover:text-red-900">Sil</button>
+                            </td>
+                        </tr>
+
+                        <!-- Örnek Personel 2 -->
+                        <tr class="hover:bg-gray-50 transition duration-150">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0 h-10 w-10">
+                                        <div class="h-10 w-10 rounded-full bg-purple-100 flex items-center justify-center">
+                                            <span class="text-purple-600 font-semibold">AD</span>
+                                        </div>
+                                    </div>
+                                    <div class="ml-4">
+                                        <div class="text-sm font-medium text-gray-900">Ayşe Demir</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">İnsan Kaynakları</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">12000 ₺</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">2023-03-20</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                    Aktif
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                <button class="text-purple-600 hover:text-purple-900 mr-3">Düzenle</button>
+                                <button class="text-red-600 hover:text-red-900">Sil</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Personel Yönetimi -->
+        <div class="bg-white mt-3 rounded-lg shadow-lg p-6">
+            <h2 class="text-xl font-bold text-gray-800 mb-4">Personel Yönetimi</h2>
+            <div class="space-y-4">
+                <a href="{{ url_for('personel_ekle') }}" class="block text-gray-600 hover:text-purple-600">
+                    Yeni Personel Ekle
+                </a>
+                <a href="{{ url_for('personel_ekle') }}" class="block text-gray-600 hover:text-purple-600">
+                    Personel Listesi
+                </a>
+                <a href="{{ url_for('personel_giris_cikis') }}" class="block text-gray-600 hover:text-purple-600">
+                    Giriş-Çıkış Kayıtları
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tablo satırlarına animasyon ekleme
+        anime({
+            targets: 'tbody tr',
+            translateX: [-50, 0],
+            opacity: [0, 1],
+            delay: anime.stagger(100),
+            duration: 800,
+            easing: 'easeOutExpo'
+        });
+    </script>
+</body>
+</html> 

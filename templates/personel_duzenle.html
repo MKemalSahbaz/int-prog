@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personel Düzenle - PTS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-lg">
+        <div class="container mx-auto px-6 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <span class="text-2xl font-bold text-purple-600">PTS</span>
+                    <span class="ml-2 text-gray-800">Personel Takip Sistemi</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="{{ url_for('index') }}" class="text-gray-600 hover:text-purple-600">Panel</a>
+                    <a href="{{ url_for('cikis') }}" class="text-gray-600 hover:text-purple-600">Çıkış Yap</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Ana İçerik -->
+    <div class="container mx-auto px-6 py-8">
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h1 class="text-2xl font-bold text-gray-800">Personel Düzenle</h1>
+                <a href="{{ url_for('personel_detay', personel_id=1) }}" class="text-gray-600 hover:text-purple-600">
+                    Geri Dön
+                </a>
+            </div>
+
+            <form method="POST" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Kişisel Bilgiler -->
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <h2 class="text-xl font-semibold mb-4 text-gray-800">Kişisel Bilgiler</h2>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-gray-600 mb-2">Ad Soyad</label>
+                                <input type="text" name="ad_soyad" value="Ahmet Yılmaz" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
+                            </div>
+                            <div>
+                                <label class="block text-gray-600 mb-2">TC Kimlik No</label>
+                                <input type="text" name="tc_no" value="12345678901" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
+                            </div>
+                            <div>
+                                <label class="block text-gray-600 mb-2">Doğum Tarihi</label>
+                                <input type="date" name="dogum_tarihi" value="1990-01-01" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
+                            </div>
+                            <div>
+                                <label class="block text-gray-600 mb-2">E-posta</label>
+                                <input type="email" name="email" value="ahmet.yilmaz@example.com" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
+                            </div>
+                            <div>
+                                <label class="block text-gray-600 mb-2">Telefon</label>
+                                <input type="tel" name="telefon" value="+90 555 123 4567" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- İş Bilgileri -->
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <h2 class="text-xl font-semibold mb-4 text-gray-800">İş Bilgileri</h2>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-gray-600 mb-2">Departman</label>
+                                <select name="departman" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
+                                    <option value="yazilim" selected>Yazılım Geliştirme</option>
+                                    <option value="muhasebe">Muhasebe</option>
+                                    <option value="insan_kaynaklari">İnsan Kaynakları</option>
+                                    <option value="satis">Satış</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-gray-600 mb-2">Pozisyon</label>
+                                <input type="text" name="pozisyon" value="Yazılım Mühendisi" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
+                            </div>
+                            <div>
+                                <label class="block text-gray-600 mb-2">İşe Başlama Tarihi</label>
+                                <input type="date" name="ise_baslama" value="2020-01-01" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
+                            </div>
+                            <div>
+                                <label class="block text-gray-600 mb-2">Maaş</label>
+                                <input type="number" name="maas" value="15000" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
+                            </div>
+                            <div>
+                                <label class="block text-gray-600 mb-2">Durum</label>
+                                <select name="durum" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
+                                    <option value="aktif" selected>Aktif</option>
+                                    <option value="pasif">Pasif</option>
+                                    <option value="izinli">İzinli</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-end space-x-4 mt-6">
+                    <button type="button" class="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-100 transition duration-300">
+                        İptal
+                    </button>
+                    <button type="submit" class="px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition duration-300">
+                        Kaydet
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html> 
