@@ -43,4 +43,8 @@ Personel Takip Sistemi, şirketlerin personel yönetimini kolaylaştırmak için
 2. Varsayılan kullanıcı bilgileri:
    - Kullanıcı adı: admin
    - Şifre: admin123
+## Github
+
+https://github.com/MKemalSahbaz/int-prog.git
+
 
