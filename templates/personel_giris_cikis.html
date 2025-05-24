@@ -34,69 +34,70 @@
             </div>
 
             <!-- Filtreler -->
-            <div class="mb-6 bg-gray-50 p-4 rounded-lg">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <form method="get" class="mb-6 bg-gray-50 p-4 rounded-lg">
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
                     <div>
                         <label class="block text-gray-600 mb-2">Tarih Aralığı</label>
                         <div class="flex space-x-2">
-                            <input type="date" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
-                            <input type="date" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
+                            <input type="date" name="baslangic" value="{{ secili_baslangic or '' }}" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
+                            <input type="date" name="bitis" value="{{ secili_bitis or '' }}" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
                         </div>
                     </div>
                     <div>
-                        <label class="block text-gray-600 mb-2">Durum</label>
-                        <select class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
-                            <option value="tumu">Tümü</option>
-                            <option value="tamamlandi">Tamamlandı</option>
-                            <option value="eksik">Eksik</option>
+                        <label class="block text-gray-600 mb-2">Personel</label>
+                        <select name="personel_id" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
+                            <option value="">Tümü</option>
+                            {% for p in personeller %}
+                            <option value="{{ p.id }}" {% if secili_personel == p.id %}selected{% endif %}>{{ p.ad }} {{ p.soyad }}</option>
+                            {% endfor %}
                         </select>
                     </div>
+                    <div>
+                        <label class="block text-gray-600 mb-2">Durum</label>
+                        <select name="durum" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
+                            <option value="">Tümü</option>
+                            <option value="tamamlandi" {% if secili_durum == 'tamamlandi' %}selected{% endif %}>Tamamlandı</option>
+                            <option value="eksik" {% if secili_durum == 'eksik' %}selected{% endif %}>Eksik</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-gray-600 mb-2">Arama</label>
+                        <input type="text" name="arama" value="{{ secili_arama or '' }}" placeholder="Ad veya soyad..." class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
+                    </div>
                     <div class="flex items-end">
-                        <button class="w-full bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transition duration-300">
+                        <button type="submit" class="w-full bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transition duration-300">
                             Filtrele
                         </button>
                     </div>
                 </div>
-            </div>
+            </form>
 
             <!-- Kayıt Tablosu -->
             <div class="overflow-x-auto">
                 <table class="min-w-full">
                     <thead>
                         <tr class="bg-gray-100">
+                            <th class="py-3 px-4 text-left text-gray-600">Personel</th>
                             <th class="py-3 px-4 text-left text-gray-600">Tarih</th>
                             <th class="py-3 px-4 text-left text-gray-600">Giriş Saati</th>
                             <th class="py-3 px-4 text-left text-gray-600">Çıkış Saati</th>
-                            <th class="py-3 px-4 text-left text-gray-600">Toplam Süre</th>
-                            <th class="py-3 px-4 text-left text-gray-600">Durum</th>
                             <th class="py-3 px-4 text-left text-gray-600">İşlemler</th>
                         </tr>
                     </thead>
                     <tbody>
+                        {% for kayit in kayitlar %}
                         <tr class="border-b">
-                            <td class="py-3 px-4">01.03.2024</td>
-                            <td class="py-3 px-4">09:00</td>
-                            <td class="py-3 px-4">18:00</td>
-                            <td class="py-3 px-4">9 saat</td>
+                            <td class="py-3 px-4">{{ kayit.personel.ad }} {{ kayit.personel.soyad }}</td>
+                            <td class="py-3 px-4">{{ kayit.tarih }}</td>
+                            <td class="py-3 px-4">{{ kayit.giris_saati }}</td>
+                            <td class="py-3 px-4">{{ kayit.cikis_saati or '-' }}</td>
                             <td class="py-3 px-4">
-                                <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-sm">Tamamlandı</span>
-                            </td>
-                            <td class="py-3 px-4">
-                                <button class="text-purple-600 hover:text-purple-800">Düzenle</button>
+                                <form action="{{ url_for('giris_cikis_sil', kayit_id=kayit.id) }}" method="POST" style="display:inline;">
+                                    <button type="submit" class="text-red-600 hover:text-red-900" onclick="return confirm('Kayıt silinsin mi?')">Sil</button>
+                                </form>
                             </td>
                         </tr>
-                        <tr class="border-b">
-                            <td class="py-3 px-4">29.02.2024</td>
-                            <td class="py-3 px-4">09:15</td>
-                            <td class="py-3 px-4">-</td>
-                            <td class="py-3 px-4">-</td>
-                            <td class="py-3 px-4">
-                                <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm">Eksik</span>
-                            </td>
-                            <td class="py-3 px-4">
-                                <button class="text-purple-600 hover:text-purple-800">Düzenle</button>
-                            </td>
-                        </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
@@ -114,7 +115,16 @@
                     </svg>
                 </button>
             </div>
-            <form action="{{ url_for('giris_cikis_ekle') }}" method="POST" class="space-y-4">
+            <form action="{{ url_for('giris_cikis_ekle', personel_id=0) }}" method="POST" class="space-y-4" id="genelGirisCikisForm">
+                <div>
+                    <label class="block text-gray-600 mb-2">Personel</label>
+                    <select name="personel_id" required class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
+                        <option value="">Seçiniz</option>
+                        {% for p in personeller %}
+                        <option value="{{ p.id }}">{{ p.ad }} {{ p.soyad }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
                 <div>
                     <label class="block text-gray-600 mb-2">Tarih</label>
                     <input type="date" name="tarih" required class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
@@ -140,6 +150,16 @@
     </div>
 
     <script>
+        // Modal formunu dinamik olarak doğru personel_id ile gönder
+        document.getElementById('genelGirisCikisForm').onsubmit = function(e) {
+            var select = this.querySelector('select[name="personel_id"]');
+            if (!select.value) {
+                e.preventDefault();
+                alert('Lütfen bir personel seçin!');
+                return false;
+            }
+            this.action = '/personel/' + select.value + '/giris-cikis-ekle';
+        };
         function toggleModal() {
             const modal = document.getElementById('modal');
             modal.classList.toggle('hidden');

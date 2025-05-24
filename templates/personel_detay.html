@@ -45,7 +45,7 @@
                     <div class="space-y-4">
                         <div>
                             <label class="text-gray-600">Ad Soyad</label>
-                            <p class="font-medium">Ahmet Yılmaz</p>
+                            <p class="font-medium">{{ personel.ad }} {{ personel.soyad }}</p>
                         </div>
                         <div>
                             <label class="text-gray-600">TC Kimlik No</label>
@@ -76,19 +76,23 @@
                         </div>
                         <div>
                             <label class="text-gray-600">Pozisyon</label>
-                            <p class="font-medium">Yazılım Mühendisi</p>
+                            <p class="font-medium">{{ personel.pozisyon }}</p>
                         </div>
                         <div>
                             <label class="text-gray-600">İşe Başlama Tarihi</label>
-                            <p class="font-medium">01.01.2020</p>
+                            <p class="font-medium">{{ personel.baslangic_tarihi }}</p>
                         </div>
                         <div>
                             <label class="text-gray-600">Maaş</label>
-                            <p class="font-medium">15.000 TL</p>
+                            <p class="font-medium">{{ personel.maas }} ₺</p>
                         </div>
                         <div>
                             <label class="text-gray-600">Durum</label>
-                            <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-sm">Aktif</span>
+                            <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-sm">{{ personel.durum }}</span>
+                        </div>
+                        <div>
+                            <label class="text-gray-600">Açıklama</label>
+                            <p class="font-medium">{{ personel.aciklama }}</p>
                         </div>
                     </div>
                 </div>
@@ -97,6 +101,23 @@
             <!-- Çalışma Geçmişi -->
             <div class="mt-8">
                 <h2 class="text-xl font-semibold mb-4 text-gray-800">Çalışma Geçmişi</h2>
+                <div class="bg-gray-50 p-6 rounded-lg mb-6">
+                    <form action="{{ url_for('giris_cikis_ekle', personel_id=personel.id) }}" method="POST" class="flex flex-wrap gap-4 items-end">
+                        <div>
+                            <label class="block text-gray-600 mb-2">Tarih</label>
+                            <input type="date" name="tarih" required class="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
+                        </div>
+                        <div>
+                            <label class="block text-gray-600 mb-2">Giriş Saati</label>
+                            <input type="time" name="giris_saati" required class="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
+                        </div>
+                        <div>
+                            <label class="block text-gray-600 mb-2">Çıkış Saati</label>
+                            <input type="time" name="cikis_saati" class="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
+                        </div>
+                        <button type="submit" class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transition duration-300">Ekle</button>
+                    </form>
+                </div>
                 <div class="bg-gray-50 p-6 rounded-lg">
                     <div class="overflow-x-auto">
                         <table class="min-w-full">
@@ -110,24 +131,17 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                {% for giris in personel.girisler %}
                                 <tr>
-                                    <td class="py-2 px-4">01.03.2024</td>
-                                    <td class="py-2 px-4">09:00</td>
-                                    <td class="py-2 px-4">18:00</td>
-                                    <td class="py-2 px-4">9 saat</td>
+                                    <td class="py-2 px-4">{{ giris.tarih }}</td>
+                                    <td class="py-2 px-4">{{ giris.giris_saati }}</td>
+                                    <td class="py-2 px-4">{{ giris.cikis_saati or '-' }}</td>
+                                    <td class="py-2 px-4">-</td>
                                     <td class="py-2 px-4">
                                         <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-sm">Tamamlandı</span>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td class="py-2 px-4">29.02.2024</td>
-                                    <td class="py-2 px-4">09:15</td>
-                                    <td class="py-2 px-4">17:45</td>
-                                    <td class="py-2 px-4">8.5 saat</td>
-                                    <td class="py-2 px-4">
-                                        <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-sm">Tamamlandı</span>
-                                    </td>
-                                </tr>
+                                {% endfor %}
                             </tbody>
                         </table>
                     </div>

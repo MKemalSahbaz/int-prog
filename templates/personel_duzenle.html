@@ -40,24 +40,28 @@
                         <h2 class="text-xl font-semibold mb-4 text-gray-800">Kişisel Bilgiler</h2>
                         <div class="space-y-4">
                             <div>
-                                <label class="block text-gray-600 mb-2">Ad Soyad</label>
-                                <input type="text" name="ad_soyad" value="Ahmet Yılmaz" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
+                                <label class="block text-gray-600 mb-2">Ad</label>
+                                <input type="text" name="ad" value="{{ personel.ad }}" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
+                            </div>
+                            <div>
+                                <label class="block text-gray-600 mb-2">Soyad</label>
+                                <input type="text" name="soyad" value="{{ personel.soyad }}" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
                             </div>
                             <div>
                                 <label class="block text-gray-600 mb-2">TC Kimlik No</label>
-                                <input type="text" name="tc_no" value="12345678901" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
+                                <input type="text" name="tc_no" value="{{ personel.tc_no }}" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
                             </div>
                             <div>
                                 <label class="block text-gray-600 mb-2">Doğum Tarihi</label>
-                                <input type="date" name="dogum_tarihi" value="1990-01-01" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
+                                <input type="date" name="dogum_tarihi" value="{{ personel.dogum_tarihi }}" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
                             </div>
                             <div>
                                 <label class="block text-gray-600 mb-2">E-posta</label>
-                                <input type="email" name="email" value="ahmet.yilmaz@example.com" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
+                                <input type="email" name="email" value="{{ personel.email }}" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
                             </div>
                             <div>
                                 <label class="block text-gray-600 mb-2">Telefon</label>
-                                <input type="tel" name="telefon" value="+90 555 123 4567" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
+                                <input type="tel" name="telefon" value="{{ personel.telefon }}" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
                             </div>
                         </div>
                     </div>
@@ -69,43 +73,42 @@
                             <div>
                                 <label class="block text-gray-600 mb-2">Departman</label>
                                 <select name="departman" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
-                                    <option value="yazilim" selected>Yazılım Geliştirme</option>
-                                    <option value="muhasebe">Muhasebe</option>
-                                    <option value="insan_kaynaklari">İnsan Kaynakları</option>
-                                    <option value="satis">Satış</option>
+                                    <option value="yazilim" {% if personel.departman == 'yazilim' %}selected{% endif %}>Yazılım Geliştirme</option>
+                                    <option value="muhasebe" {% if personel.departman == 'muhasebe' %}selected{% endif %}>Muhasebe</option>
+                                    <option value="insan_kaynaklari" {% if personel.departman == 'insan_kaynaklari' %}selected{% endif %}>İnsan Kaynakları</option>
+                                    <option value="satis" {% if personel.departman == 'satis' %}selected{% endif %}>Satış</option>
                                 </select>
                             </div>
                             <div>
                                 <label class="block text-gray-600 mb-2">Pozisyon</label>
-                                <input type="text" name="pozisyon" value="Yazılım Mühendisi" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
+                                <input type="text" name="pozisyon" value="{{ personel.pozisyon }}" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
                             </div>
                             <div>
-                                <label class="block text-gray-600 mb-2">İşe Başlama Tarihi</label>
-                                <input type="date" name="ise_baslama" value="2020-01-01" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
+                                <label class="block text-gray-600 mb-2">Başlangıç Tarihi</label>
+                                <input type="date" name="baslangic_tarihi" value="{{ personel.baslangic_tarihi }}" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
                             </div>
                             <div>
                                 <label class="block text-gray-600 mb-2">Maaş</label>
-                                <input type="number" name="maas" value="15000" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
+                                <input type="number" name="maas" value="{{ personel.maas }}" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
                             </div>
                             <div>
                                 <label class="block text-gray-600 mb-2">Durum</label>
                                 <select name="durum" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
-                                    <option value="aktif" selected>Aktif</option>
-                                    <option value="pasif">Pasif</option>
-                                    <option value="izinli">İzinli</option>
+                                    <option value="Aktif" {% if personel.durum == 'Aktif' %}selected{% endif %}>Aktif</option>
+                                    <option value="Pasif" {% if personel.durum == 'Pasif' %}selected{% endif %}>Pasif</option>
                                 </select>
+                            </div>
+                            <div>
+                                <label class="block text-gray-600 mb-2">Açıklama</label>
+                                <textarea name="aciklama" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">{{ personel.aciklama }}</textarea>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="flex justify-end space-x-4 mt-6">
-                    <button type="button" class="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-100 transition duration-300">
-                        İptal
-                    </button>
-                    <button type="submit" class="px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition duration-300">
-                        Kaydet
-                    </button>
+                    <a href="{{ url_for('personel_detay', personel_id=personel.id) }}" class="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-100 transition duration-300">İptal</a>
+                    <button type="submit" class="px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition duration-300">Kaydet</button>
                 </div>
             </form>
         </div>
